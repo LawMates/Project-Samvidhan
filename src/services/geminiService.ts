@@ -59,7 +59,8 @@ export const askGemini = async (query: string): Promise<string> => {
    - Educational and beginner-friendly
    - Rich with article numbers, IPC/CrPC sections, or key legal terms when relevant
 
-5. Keep responses concise but comprehensive.`; 
+5. Keep responses concise but comprehensive.
+dont give any highlighted or bold text, just give plain text and dont give stars next to points.if there are any point give it in numbers`; 
 
   const response = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
