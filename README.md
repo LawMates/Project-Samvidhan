@@ -1,22 +1,16 @@
-# Welcome to your Lovable project
+# Welcome to Project Samvidhaan
 
-## Project info
+## About the Project
 
-**URL**: https://lovable.dev/projects/d0794b26-d7c8-4492-a37f-139a7ad8b557
+Project Samvidhaan is an interactive platform designed to educate users about the Indian Constitution through engaging games, videos, and stories. It aims to make learning about the Constitution fun and accessible for everyone.
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/d0794b26-d7c8-4492-a37f-139a7ad8b557) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in the project.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -30,7 +24,7 @@ git clone <YOUR_GIT_URL>
 cd <YOUR_PROJECT_NAME>
 
 # Step 3: Install the necessary dependencies.
-npm i
+npm install
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
@@ -57,17 +51,9 @@ This project is built with:
 - Vite
 - TypeScript
 - React
-- shadcn-ui
 - Tailwind CSS
+- Supabase
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/d0794b26-d7c8-4492-a37f-139a7ad8b557) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+To deploy this project, you can use any hosting platform that supports static sites or Node.js applications. Ensure that you build the project using `npm run build` and upload the generated files from the `dist` folder to your hosting provider.
