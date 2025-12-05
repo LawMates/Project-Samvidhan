@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Clock, Star, CheckCircle, XCircle, Lightbulb, RotateCcw, LogIn } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { WordSearchGame } from "@/components/games/WordSearchGame";
 
 const GamePlay = () => {
   const { levelId } = useParams();
@@ -26,43 +27,18 @@ const GamePlay = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
   const [showHint, setShowHint] = useState(false);
-  const [flippedCards, setFlippedCards] = useState<number[]>([]);
-  const [memoryCards, setMemoryCards] = useState<Array<{id: number; content: string; pair: string; flipped: boolean; matched: boolean}>>([]);
-  const [moves, setMoves] = useState(0);
-  const [matches, setMatches] = useState(0);
-  const [canFlip, setCanFlip] = useState(true);
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const [memoryCards, setMemoryCards] = useState<Array<{id: string; content: string; type: 'question' | 'answer'; matched: boolean}>>([]);
   const [startTime] = useState(Date.now());
 
   // Initialize memory game cards
   useEffect(() => {
     if (level?.type === "memory") {
-      const allCards: typeof memoryCards = [];
-      level.questions.forEach((q, index) => {
-        allCards.push({
-          id: index * 2,
-          content: q.question,
-          pair: q.answer,
-          flipped: false,
-          matched: false
-        });
-        allCards.push({
-          id: index * 2 + 1,
-          content: q.answer,
-          pair: q.question,
-          flipped: false,
-          matched: false
-        });
-      });
-      // Shuffle
-      for (let i = allCards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [allCards[i], allCards[j]] = [allCards[j], allCards[i]];
-      }
-      setMemoryCards(allCards);
-      setMoves(0);
-      setMatches(0);
-      setFlippedCards([]);
-      setCanFlip(true);
+      const cards = level.questions.flatMap(q => [
+        { id: `q-${q.id}`, content: q.question, type: 'question' as const, matched: false },
+        { id: `a-${q.id}`, content: q.answer, type: 'answer' as const, matched: false }
+      ]);
+      setMemoryCards(cards.sort(() => Math.random() - 0.5));
     }
   }, [level]);
 
@@ -188,58 +164,37 @@ const GamePlay = () => {
     }, 1500);
   };
 
-  const handleMemoryCardClick = (index: number) => {
-    if (!level || !canFlip) return;
+  const handleMemoryCardClick = (cardId: string) => {
+    if (!level) return;
     
-    const card = memoryCards[index];
-    if (card.flipped || card.matched) return;
-    if (flippedCards.length >= 2) return;
+    const card = memoryCards.find(c => c.id === cardId);
+    if (!card || card.matched) return;
 
-    const newCards = [...memoryCards];
-    newCards[index].flipped = true;
-    setMemoryCards(newCards);
+    if (!selectedCard) {
+      setSelectedCard(cardId);
+    } else {
+      const firstCard = memoryCards.find(c => c.id === selectedCard);
+      if (!firstCard) return;
 
-    const newFlipped = [...flippedCards, index];
-    setFlippedCards(newFlipped);
-
-    if (newFlipped.length === 2) {
-      setMoves(prev => prev + 1);
-      setCanFlip(false);
-
-      const [first, second] = newFlipped;
-      const firstCard = memoryCards[first];
-      const secondCard = newCards[second];
-
-      if (firstCard.content === secondCard.pair || firstCard.pair === secondCard.content) {
-        // Match found
-        setTimeout(() => {
-          const matchedCards = [...newCards];
-          matchedCards[first].matched = true;
-          matchedCards[second].matched = true;
-          setMemoryCards(matchedCards);
-          setScore(prev => prev + level.pointsPerQuestion);
-          toast.success("Match found! 🎉");
-          setMatches(prev => {
-            const newMatches = prev + 1;
-            if (newMatches === level.questions.length) {
-              setTimeout(finishGame, 500);
-            }
-            return newMatches;
-          });
-          setFlippedCards([]);
-          setCanFlip(true);
-        }, 500);
-      } else {
-        // No match
-        setTimeout(() => {
-          const resetCards = [...newCards];
-          resetCards[first].flipped = false;
-          resetCards[second].flipped = false;
-          setMemoryCards(resetCards);
-          setFlippedCards([]);
-          setCanFlip(true);
-        }, 1000);
+      const firstQuestionId = selectedCard.split('-')[1];
+      const secondQuestionId = cardId.split('-')[1];
+      
+      if (firstQuestionId === secondQuestionId && firstCard.type !== card.type) {
+        setMemoryCards(prev => prev.map(c => 
+          c.id === selectedCard || c.id === cardId 
+            ? { ...c, matched: true } 
+            : c
+        ));
+        setScore(prev => prev + level.pointsPerQuestion);
+        toast.success("Match found! 🎉");
+        
+        const remainingPairs = memoryCards.filter(c => !c.matched && c.id !== selectedCard && c.id !== cardId).length;
+        if (remainingPairs === 0) {
+          setTimeout(finishGame, 500);
+        }
       }
+      
+      setTimeout(() => setSelectedCard(null), 500);
     }
   };
 
@@ -361,7 +316,7 @@ const GamePlay = () => {
         </div>
 
         {/* Game Area */}
-        <Card className="max-w-2xl mx-auto">
+        <Card className={`mx-auto ${level.type === "wordsearch" ? "max-w-4xl" : "max-w-2xl"}`}>
           <CardContent className="pt-6">
             {level.type === "scramble" && (
               <div className="space-y-6 text-center">
@@ -435,60 +390,22 @@ const GamePlay = () => {
             )}
 
             {level.type === "memory" && (
-              <div className="space-y-6">
-                {/* Progress Header */}
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-muted-foreground">
-                    Matches: {matches}/{level.questions.length}
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-sm text-muted-foreground">
-                      Moves: {moves}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                      <span className="font-medium text-sm">Target: &lt;20 moves</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-primary transition-all duration-300"
-                    style={{ width: `${(matches / level.questions.length) * 100}%` }}
-                  />
-                </div>
-
-                {/* Cards Grid */}
+              <div className="space-y-4">
+                <p className="text-center text-muted-foreground">Match the terms with their meanings!</p>
                 <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
-                  {memoryCards.map((card, index) => (
-                    <Card
+                  {memoryCards.map((card) => (
+                    <Button
                       key={card.id}
-                      className={`cursor-pointer transition-all duration-300 ${
-                        card.matched ? 'opacity-50 scale-95' : 'hover:scale-105'
+                      variant={card.matched ? "default" : selectedCard === card.id ? "secondary" : "outline"}
+                      className={`h-20 text-xs p-2 ${
+                        card.matched ? "bg-secondary text-secondary-foreground" : ""
                       }`}
-                      onClick={() => handleMemoryCardClick(index)}
+                      onClick={() => handleMemoryCardClick(card.id)}
+                      disabled={card.matched}
                     >
-                      <CardContent className="p-4 h-24 flex items-center justify-center">
-                        {card.flipped || card.matched ? (
-                          <div className={`text-xs text-center font-medium ${
-                            card.matched ? 'text-green-600' : 'text-foreground'
-                          }`}>
-                            {card.content}
-                          </div>
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center">
-                            <div className="text-4xl">?</div>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
+                      {card.content}
+                    </Button>
                   ))}
-                </div>
-
-                <div className="text-center text-sm text-muted-foreground">
-                  Click cards to match articles with their descriptions
                 </div>
               </div>
             )}
@@ -520,69 +437,15 @@ const GamePlay = () => {
             )}
 
             {level.type === "wordsearch" && (
-              <div className="space-y-6 text-center">
-                <p className="text-muted-foreground">{question.question}</p>
-                <p className="text-sm">Type the word you found:</p>
-                <Input
-                  value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
-                  placeholder="Type the word..."
-                  className="max-w-xs mx-auto text-center text-lg"
-                  onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
-                  disabled={showResult}
+              <div className="space-y-4">
+                <p className="text-center text-muted-foreground text-lg">Can you find all the hidden words in the grid?</p>
+                <WordSearchGame
+                  words={level.questions.map(q => q.answer)}
+                  onWordFound={(word) => {
+                    setScore(prev => prev + level.pointsPerQuestion);
+                  }}
+                  onAllWordsFound={finishGame}
                 />
-                <Button onClick={checkAnswer} disabled={!answer.trim() || showResult}>
-                  Submit
-                </Button>
-                {showResult && (
-                  <div className={`flex items-center justify-center gap-2 ${isCorrect ? "text-secondary" : "text-destructive"}`}>
-                    {isCorrect ? <CheckCircle className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
-                    <span>{isCorrect ? "Found it! 🎉" : "Try again!"}</span>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {level.type === "truthlie" && (
-              <div className="space-y-6">
-                <div className="text-center">
-                  <Badge variant="outline" className="mb-4 text-lg px-4 py-2">🤥 2 Truths, 1 Lie</Badge>
-                  <p className="text-xl font-medium">Guess the LIE!</p>
-                  <p className="text-sm text-muted-foreground mt-2">One of these statements is false. Can you spot it?</p>
-                </div>
-                <div className="grid gap-3">
-                  {question.options?.map((option, index) => (
-                    <Button
-                      key={option}
-                      variant={showResult && option === question.answer ? "destructive" : "outline"}
-                      className={`h-auto py-4 px-6 text-left justify-start whitespace-normal ${
-                        showResult && option === question.answer 
-                          ? "bg-destructive text-destructive-foreground" 
-                          : showResult && option !== question.answer
-                            ? "bg-secondary/20 border-secondary"
-                            : ""
-                      }`}
-                      onClick={() => handleQuizAnswer(option)}
-                      disabled={showResult}
-                    >
-                      <span className="mr-3 font-bold text-lg">{index + 1}.</span>
-                      {option}
-                    </Button>
-                  ))}
-                </div>
-                {showResult && (
-                  <div className="space-y-3">
-                    <div className={`flex items-center justify-center gap-2 ${isCorrect ? "text-secondary" : "text-destructive"}`}>
-                      {isCorrect ? <CheckCircle className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
-                      <span className="font-medium">{isCorrect ? "You found the lie! 🎉" : "Wrong! That was actually true."}</span>
-                    </div>
-                    {question.explanation && (
-                      <p className="text-sm text-muted-foreground text-center bg-muted p-4 rounded-lg">
-                        💡 {question.explanation}
-                      </p>
-                    )}
-                  </div>
-                )}
               </div>
             )}
           </CardContent>
