@@ -1,4 +1,4 @@
-export type GameType = "scramble" | "quiz" | "memory" | "puzzle" | "wordsearch";
+export type GameType = "scramble" | "quiz" | "memory" | "puzzle" | "wordsearch" | "truthlie";
 export type Difficulty = "easy" | "medium" | "hard";
 
 export interface GameLevel {
@@ -104,18 +104,48 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 4,
-    title: "Article Numbers",
-    description: "Match articles with their subjects",
-    type: "puzzle",
+    title: "2 Truths 1 Lie",
+    description: "Guess the lie from 3 statements",
+    type: "truthlie",
     difficulty: "easy",
-    timeLimit: 120,
-    pointsPerQuestion: 12,
+    timeLimit: 180,
+    pointsPerQuestion: 15,
     questions: [
-      { id: "4-1", question: "Article 14", answer: "Equality before law" },
-      { id: "4-2", question: "Article 19", answer: "Freedom of Speech" },
-      { id: "4-3", question: "Article 21", answer: "Right to Life" },
-      { id: "4-4", question: "Article 32", answer: "Constitutional Remedies" },
-      { id: "4-5", question: "Article 44", answer: "Uniform Civil Code" },
+      { 
+        id: "4-1", 
+        question: "Which statement is FALSE?", 
+        answer: "India has 30 states",
+        options: ["India has 30 states","The Constitution of India came into effect on January 26, 1950",  "Dr. B.R. Ambedkar is called the Father of Indian Constitution"],
+        explanation: "India currently has 28 states, not 30."
+      },
+      { 
+        id: "4-2", 
+        question: "Which statement is FALSE?", 
+        answer: "Article 19 guarantees Right to Life",
+        options: ["Article 14 guarantees Equality before law", "Article 32 is called the Heart and Soul of the Constitution","Article 19 guarantees Right to Life"],
+        explanation: "Article 21 (not 19) guarantees Right to Life. Article 19 deals with Freedom of Speech."
+      },
+      { 
+        id: "4-3", 
+        question: "Which statement is FALSE?", 
+        answer: "There are 8 Fundamental Duties",
+        options: ["The Preamble declares India as a Sovereign Socialist Secular Democratic Republic", "There are 8 Fundamental Duties", "The Indian Constitution is the longest written constitution in the world"],
+        explanation: "There are 11 Fundamental Duties, not 8."
+      },
+      { 
+        id: "4-4", 
+        question: "Which statement is FALSE?", 
+        answer: "Parliament can change the Basic Structure of Constitution",
+        options: ["The Constitution originally had 395 Articles", "Parliament can change the Basic Structure of Constitution", "The Preamble was amended by the 42nd Amendment"],
+        explanation: "Parliament cannot change the Basic Structure as per Kesavananda Bharati case (1973)."
+      },
+      { 
+        id: "4-5", 
+        question: "Which statement is FALSE?", 
+        answer: "Directive Principles are legally enforceable",
+        options: ["Directive Principles are legally enforceable","Fundamental Rights are enforceable by courts", "The Constitution provides for both written and unwritten conventions"],
+        explanation: "Directive Principles are NOT legally enforceable - they are guidelines for the state."
+      },
     ],
   },
   {
@@ -387,5 +417,7 @@ export const getGameTypeIcon = (type: GameType) => {
       return "🧩";
     case "wordsearch":
       return "🔍";
+    case "truthlie":
+      return "🤥";
   }
 };

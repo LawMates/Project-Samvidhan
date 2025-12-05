@@ -188,7 +188,7 @@ const GamePlay = () => {
     }, 1500);
   };
 
-    const handleMemoryCardClick = (index: number) => {
+  const handleMemoryCardClick = (index: number) => {
     if (!level || !canFlip) return;
     
     const card = memoryCards[index];
@@ -538,6 +538,49 @@ const GamePlay = () => {
                   <div className={`flex items-center justify-center gap-2 ${isCorrect ? "text-secondary" : "text-destructive"}`}>
                     {isCorrect ? <CheckCircle className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
                     <span>{isCorrect ? "Found it! 🎉" : "Try again!"}</span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {level.type === "truthlie" && (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <Badge variant="outline" className="mb-4 text-lg px-4 py-2">🤥 2 Truths, 1 Lie</Badge>
+                  <p className="text-xl font-medium">Guess the LIE!</p>
+                  <p className="text-sm text-muted-foreground mt-2">One of these statements is false. Can you spot it?</p>
+                </div>
+                <div className="grid gap-3">
+                  {question.options?.map((option, index) => (
+                    <Button
+                      key={option}
+                      variant={showResult && option === question.answer ? "destructive" : "outline"}
+                      className={`h-auto py-4 px-6 text-left justify-start whitespace-normal ${
+                        showResult && option === question.answer 
+                          ? "bg-destructive text-destructive-foreground" 
+                          : showResult && option !== question.answer
+                            ? "bg-secondary/20 border-secondary"
+                            : ""
+                      }`}
+                      onClick={() => handleQuizAnswer(option)}
+                      disabled={showResult}
+                    >
+                      <span className="mr-3 font-bold text-lg">{index + 1}.</span>
+                      {option}
+                    </Button>
+                  ))}
+                </div>
+                {showResult && (
+                  <div className="space-y-3">
+                    <div className={`flex items-center justify-center gap-2 ${isCorrect ? "text-secondary" : "text-destructive"}`}>
+                      {isCorrect ? <CheckCircle className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
+                      <span className="font-medium">{isCorrect ? "You found the lie! 🎉" : "Wrong! That was actually true."}</span>
+                    </div>
+                    {question.explanation && (
+                      <p className="text-sm text-muted-foreground text-center bg-muted p-4 rounded-lg">
+                        💡 {question.explanation}
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
