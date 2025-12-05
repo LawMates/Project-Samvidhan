@@ -14,17 +14,12 @@ export function HeroSection() {
 
       <div className="container mx-auto px-4 relative">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border shadow-soft mb-6 animate-fade-in">
-            <Sparkles className="w-4 h-4 text-gold" />
-            <span className="text-sm font-medium">Learn the Constitution through Play</span>
-          </div>
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            <span className="text-gradient-tricolor">Constitution</span>
+            <span className="text-foreground">Project</span>
             <br />
-            <span className="text-foreground">Guardian</span>
+            <span className="text-gradient-tricolor">SAMVIDHAN</span>
           </h1>
 
           {/* Subtitle */}

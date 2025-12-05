@@ -20,7 +20,15 @@ const features = [
     borderColor: "hover:border-saffron/50",
   },
   {
-    title: "Summarized Learning",
+    title: "Must know ",
+    description: "Easy-to-understand summaries of the Preamble, Rights, Duties & more.",
+    icon: BookOpen,
+    path: "/learning",
+    color: "bg-green-india/10 text-green-india",
+    borderColor: "hover:border-green-india/50",
+  },
+  {
+    title: "Classes",
     description: "Easy-to-understand summaries of the Preamble, Rights, Duties & more.",
     icon: BookOpen,
     path: "/learning",
@@ -43,22 +51,7 @@ const features = [
     color: "bg-destructive/10 text-destructive",
     borderColor: "hover:border-destructive/50",
   },
-  {
-    title: "AI Chatbot",
-    description: "Ask anything about the Constitution and get simple explanations.",
-    icon: MessageCircle,
-    path: "/chatbot",
-    color: "bg-navy/10 text-navy",
-    borderColor: "hover:border-navy/50",
-  },
-  {
-    title: "Fun Facts",
-    description: "Discover interesting facts about India's constitutional history.",
-    icon: Lightbulb,
-    path: "/learning",
-    color: "bg-gold/10 text-gold",
-    borderColor: "hover:border-gold/50",
-  },
+
 ];
 
 export function FeatureCards() {

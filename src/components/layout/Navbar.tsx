@@ -25,9 +25,6 @@ import {
 const navItems = [
   { path: "/", label: "Home", icon: Home },
   { path: "/games", label: "Games", icon: Gamepad2 },
-  { path: "/learning", label: "Learn", icon: BookOpen },
-  { path: "/videos", label: "Videos", icon: Video },
-  { path: "/stories", label: "Stories", icon: BookHeart },
 ];
 
 export function Navbar() {
@@ -48,10 +45,10 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-saffron via-card to-green-india flex items-center justify-center shadow-soft">
-              <span className="text-lg font-serif font-bold text-navy">CG</span>
+              <span className="text-lg font-serif font-bold text-navy">PS</span>
             </div>
             <span className="font-serif font-semibold text-lg hidden sm:block">
-              Constitution Guardian
+              Project Samvidhan
             </span>
           </Link>
 
@@ -84,7 +81,7 @@ export function Navbar() {
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" size="sm" className="ml-2 gap-2">
                       <User className="w-4 h-4" />
-                      <span className="max-w-20 truncate">{user.email?.split('@')[0]}</span>
+                      <span className="max-w-20 truncate">Accounts</span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
