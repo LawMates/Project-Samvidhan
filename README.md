@@ -2,7 +2,7 @@
 
 ## About the Project
 
-Project Samvidhaan is an interactive platform designed to educate users about the Indian Constitution through engaging games, videos, and stories. It aims to make learning about the Constitution fun and accessible for everyone.
+Project Samvidhaan is an interactive platform designed to educate users about the Indian Constitution through engaging games, videos, and stories. It aims to make learning about the Constitution fun and accessible for everyone..
 
 ## How can I edit this code?
 
