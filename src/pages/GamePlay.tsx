@@ -436,30 +436,6 @@ const GamePlay = () => {
               </div>
             )}
 
-            {level.type === "wordsearch" && (
-              <div className="space-y-6 text-center">
-                <p className="text-muted-foreground">{question.question}</p>
-                <p className="text-sm">Type the word you found:</p>
-                <Input
-                  value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
-                  placeholder="Type the word..."
-                  className="max-w-xs mx-auto text-center text-lg"
-                  onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
-                  disabled={showResult}
-                />
-                <Button onClick={checkAnswer} disabled={!answer.trim() || showResult}>
-                  Submit
-                </Button>
-                {showResult && (
-                  <div className={`flex items-center justify-center gap-2 ${isCorrect ? "text-secondary" : "text-destructive"}`}>
-                    {isCorrect ? <CheckCircle className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
-                    <span>{isCorrect ? "Found it! 🎉" : "Try again!"}</span>
-                  </div>
-                )}
-              </div>
-            )}
-
             {level.type === "truthlie" && (
               <div className="space-y-6">
                 <div className="text-center">
@@ -500,6 +476,19 @@ const GamePlay = () => {
                     )}
                   </div>
                 )}
+              </div>
+            )}
+
+            {level.type === "wordsearch" && (
+              <div className="space-y-4">
+                <p className="text-center text-muted-foreground text-lg">Can you find all the hidden words in the grid?</p>
+                <WordSearchGame
+                  words={level.questions.map(q => q.answer)}
+                  onWordFound={(word) => {
+                    setScore(prev => prev + level.pointsPerQuestion);
+                  }}
+                  onAllWordsFound={finishGame}
+                />
               </div>
             )}
           </CardContent>
