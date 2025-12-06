@@ -437,15 +437,69 @@ const GamePlay = () => {
             )}
 
             {level.type === "wordsearch" && (
-              <div className="space-y-4">
-                <p className="text-center text-muted-foreground text-lg">Can you find all the hidden words in the grid?</p>
-                <WordSearchGame
-                  words={level.questions.map(q => q.answer)}
-                  onWordFound={(word) => {
-                    setScore(prev => prev + level.pointsPerQuestion);
-                  }}
-                  onAllWordsFound={finishGame}
+              <div className="space-y-6 text-center">
+                <p className="text-muted-foreground">{question.question}</p>
+                <p className="text-sm">Type the word you found:</p>
+                <Input
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  placeholder="Type the word..."
+                  className="max-w-xs mx-auto text-center text-lg"
+                  onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
+                  disabled={showResult}
                 />
+                <Button onClick={checkAnswer} disabled={!answer.trim() || showResult}>
+                  Submit
+                </Button>
+                {showResult && (
+                  <div className={`flex items-center justify-center gap-2 ${isCorrect ? "text-secondary" : "text-destructive"}`}>
+                    {isCorrect ? <CheckCircle className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
+                    <span>{isCorrect ? "Found it! 🎉" : "Try again!"}</span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {level.type === "truthlie" && (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <Badge variant="outline" className="mb-4 text-lg px-4 py-2">🤥 2 Truths, 1 Lie</Badge>
+                  <p className="text-xl font-medium">Guess the LIE!</p>
+                  <p className="text-sm text-muted-foreground mt-2">One of these statements is false. Can you spot it?</p>
+                </div>
+                <div className="grid gap-3">
+                  {question.options?.map((option, index) => (
+                    <Button
+                      key={option}
+                      variant={showResult && option === question.answer ? "destructive" : "outline"}
+                      className={`h-auto py-4 px-6 text-left justify-start whitespace-normal ${
+                        showResult && option === question.answer 
+                          ? "bg-destructive text-destructive-foreground" 
+                          : showResult && option !== question.answer
+                            ? "bg-secondary/20 border-secondary"
+                            : ""
+                      }`}
+                      onClick={() => handleQuizAnswer(option)}
+                      disabled={showResult}
+                    >
+                      <span className="mr-3 font-bold text-lg">{index + 1}.</span>
+                      {option}
+                    </Button>
+                  ))}
+                </div>
+                {showResult && (
+                  <div className="space-y-3">
+                    <div className={`flex items-center justify-center gap-2 ${isCorrect ? "text-secondary" : "text-destructive"}`}>
+                      {isCorrect ? <CheckCircle className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
+                      <span className="font-medium">{isCorrect ? "You found the lie! 🎉" : "Wrong! That was actually true."}</span>
+                    </div>
+                    {question.explanation && (
+                      <p className="text-sm text-muted-foreground text-center bg-muted p-4 rounded-lg">
+                        💡 {question.explanation}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
