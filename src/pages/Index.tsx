@@ -8,7 +8,7 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Constitution Guardian - Learn Indian Constitution Through Games</title>
+        <title>Project Samvidhaan</title>
         <meta 
           name="description" 
           content="Discover the Indian Constitution through interactive games, engaging stories, and AI-powered learning. Make civic education fun and memorable!" 
