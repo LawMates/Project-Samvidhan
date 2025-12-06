@@ -87,7 +87,7 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 3,
-    title: "Memory Match: Articles",
+        title: "Memory Match: Articles",
     description: "Match articles with their descriptions",
     type: "memory",
     difficulty: "easy",
