@@ -31,7 +31,7 @@ export function HeroSection() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
             <Link to="/games">
-              <Button size="lg" className="gap-2 shadow-soft hover-lift w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="gap-2 hover-lift w-full sm:w-auto">
                 <Gamepad2 className="w-5 h-5" />
                 Start Playing
               </Button>

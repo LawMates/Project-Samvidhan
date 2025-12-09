@@ -29,8 +29,8 @@ export function FunFactCard() {
   return (
     <Card className="bg-gradient-to-br from-gold/10 via-card to-saffron/10 border-gold/20 shadow-soft">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="flex items-center gap-2 text-lg font-serif">
-          <Lightbulb className="w-5 h-5 text-gold" />
+        <CardTitle className="flex items-center gap-2 text-2xl font-serif">
+          <Lightbulb className="w-6 h-6 text-gold" />
           Fun Fact of the Day
         </CardTitle>
         <Button 
@@ -40,7 +40,7 @@ export function FunFactCard() {
           disabled={isLoading}
           className="hover:bg-gold/10"
         >
-          <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+          <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
         </Button>
       </CardHeader>
       <CardContent>

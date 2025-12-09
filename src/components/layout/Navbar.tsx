@@ -60,11 +60,11 @@ export function Navbar() {
               return (
                 <Link key={item.path} to={item.path}>
                   <Button
-                    variant={isActive ? "default" : "ghost"}
+                    variant="ghost"
                     size="sm"
                     className={cn(
                       "gap-2 transition-all",
-                      isActive && "shadow-soft"
+                      isActive && "bg-muted"
                     )}
                   >
                     <Icon className="w-4 h-4" />
