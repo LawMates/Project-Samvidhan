@@ -4,7 +4,7 @@ import { Gamepad2, BookOpen, Sparkles } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
+    <section className="relative overflow-hidden pt-16 md:pt-24 pb-8 md:pb-12">
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-saffron/10 rounded-full blur-3xl" />
