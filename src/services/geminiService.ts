@@ -63,7 +63,7 @@ export const askGemini = async (query: string): Promise<string> => {
 dont give any highlighted or bold text, just give plain text and dont give stars next to points.if there are any point give it in numbers`; 
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
     {
       method: 'POST',
       headers: {
