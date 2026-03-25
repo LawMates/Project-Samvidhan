@@ -7,6 +7,7 @@ import { Send, Bot, User, Mic, Volume2, VolumeX, Loader2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import { askGemini, isLegalQuestion } from "@/services/geminiService";
+import chatbotIcon from "../assets/chatbot-icon.jpg";
 
 interface Message {
   id: string;
@@ -174,8 +175,13 @@ const Chatbot = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-6">
-            <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2">
-              🤖 Constitution AI Chat
+            <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2 flex items-center justify-center gap-2">
+              <img 
+                src={chatbotIcon}
+                alt="AI Icon"
+                className="w-8 h-8 md:w-10 md:h-10"
+              />
+              Constitution AI Chat
             </h1>
             <p className="text-muted-foreground">
               Ask anything about the Indian Constitution
