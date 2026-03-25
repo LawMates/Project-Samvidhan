@@ -188,7 +188,7 @@ const Chatbot = () => {
             </p>
           </div>
 
-          <Card className="h-[600px] flex flex-col">
+          <Card className="h-[500px] flex flex-col">
             <CardHeader className="border-b py-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Bot className="w-5 h-5 text-primary" />
@@ -196,7 +196,7 @@ const Chatbot = () => {
               </CardTitle>
             </CardHeader>
             
-            <ScrollArea ref={scrollRef} className="flex-1 p-4">
+            <ScrollArea ref={scrollRef} className="h-80 p-4">
               <div className="space-y-4">
                 {messages.map((message) => (
                   <div
