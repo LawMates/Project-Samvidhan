@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/hooks/useAuth";
 import { FloatingChatButton } from "@/components/FloatingChatButton";
+import Classes from "@/pages/classes"; 
 import Index from "./pages/Index";
 import Games from "./pages/Games";
 import GamePlay from "./pages/GamePlay";
@@ -31,6 +32,7 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/games" element={<Games />} />
               <Route path="/games/:levelId" element={<GamePlay />} />
+              <Route path="/classes" element={<Classes />} />
               <Route path="/learning" element={<Learning />} />
               <Route path="/videos" element={<Videos />} />
               <Route path="/stories" element={<Stories />} />

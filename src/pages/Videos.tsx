@@ -18,57 +18,147 @@ const videos: VideoItem[] = [
   {
     id: "1",
     title: "Introduction to Indian Constitution",
-    description: "Learn the basics of India's Constitution, its history, and why it matters to every citizen.",
+    description: "Basics of the Indian Constitution and its importance.",
     category: "Basics",
-    duration: "10:23",
-    thumbnail: "https://img.youtube.com/vi/GQnFWMNFzqM/maxresdefault.jpg",
-    youtubeId: "GQnFWMNFzqM"
+    duration: "07:27",
+    thumbnail: "https://img.youtube.com/vi/z-UzdY-pXTc/maxresdefault.jpg",
+    youtubeId: "z-UzdY-pXTc"
   },
   {
     id: "2",
-    title: "Fundamental Rights Explained",
-    description: "A comprehensive guide to the 6 fundamental rights guaranteed by the Constitution.",
-    category: "Rights",
-    duration: "15:45",
-    thumbnail: "https://img.youtube.com/vi/AIJYslJt8xo/maxresdefault.jpg",
-    youtubeId: "AIJYslJt8xo"
+    title: "Features of Indian Constitution",
+    description: "Key features like federalism, secularism, and democracy.",
+    category: "Basics",
+    duration: "24:05",
+    thumbnail: "https://img.youtube.com/vi/JU3I3yBiObY/maxresdefault.jpg",
+    youtubeId: "JU3I3yBiObY"
   },
   {
     id: "3",
     title: "The Preamble - Heart of Constitution",
-    description: "Understanding the Preamble and its significance in defining India's values.",
+    description:"Meaning and values of the Preamble explained.",
     category: "Basics",
-    duration: "8:30",
-    thumbnail: "https://img.youtube.com/vi/R1cQ3_2VhxY/maxresdefault.jpg",
-    youtubeId: "R1cQ3_2VhxY"
+    duration: "19:28",
+    thumbnail: "https://img.youtube.com/vi/dXLpWXN8LuI/maxresdefault.jpg",
+    youtubeId: "dXLpWXN8LuI"
   },
   {
     id: "4",
-    title: "Women's Rights Under Constitution",
-    description: "Know your rights as a woman - constitutional provisions and landmark cases.",
-    category: "Women's Rights",
-    duration: "12:15",
-    thumbnail: "https://img.youtube.com/vi/8ELkknEReuM/maxresdefault.jpg",
-    youtubeId: "8ELkknEReuM"
+    title: "Historical Background",
+    description: "Evolution of the Constitution from British rule.",
+    category: "basics",
+    duration: "09:34",
+    thumbnail: "https://img.youtube.com/vi/WuS_wbPix84/maxresdefault.jpg",
+    youtubeId: "WuS_wbPix84&t"
   },
   {
     id: "5",
-    title: "Right to Life - Article 21",
-    description: "The most important fundamental right and its expansive interpretation by courts.",
+    title: "Fundamental rights explained",
+    description: "Overview of rights guaranteed to citizens.",
     category: "Rights",
-    duration: "11:00",
-    thumbnail: "https://img.youtube.com/vi/oSuPJ2AMWKA/maxresdefault.jpg",
-    youtubeId: "oSuPJ2AMWKA"
+    duration: "15:21",
+    thumbnail: "https://img.youtube.com/vi/pvbcJ7SkG8w/maxresdefault.jpg",
+    youtubeId: "pvbcJ7SkG8w"
   },
   {
     id: "6",
-    title: "Landmark Supreme Court Cases",
-    description: "Historic judgments that shaped constitutional law in India.",
+    title: "Article 21 - Right to Life",
+    description: "Right to life and personal liberty explained.",
+    category: "Rights",
+    duration: "08:08",
+    thumbnail: "https://img.youtube.com/vi/SsF1AWjhBY4/maxresdefault.jpg",
+    youtubeId: "SsF1AWjhBY4"
+  },
+  {
+    id: "7",
+    title: "Directive Principles of State Policy Explained",
+    description: "Guidelines for governance and state policies.",
+    category: "Rights",
+    duration: "34:56",
+    thumbnail: "https://img.youtube.com/vi/hqrxMqU8H9s/hqdefault.jpg",
+    youtubeId: "hqrxMqU8H9s"
+  },
+  {
+    id: "8",
+    title: "Rights Vs Duties",
+    description: "Difference between rights and duties.",
+    category: "Rights",
+    duration: "10:52",
+    thumbnail: "https://img.youtube.com/vi/QRO3P0MnsOA/maxresdefault.jpg",
+    youtubeId: "QRO3P0MnsOA"
+  },
+  {
+    id: "9",
+    title: "Women rights in Indian constitution",
+    description: "Constitutional rights ensuring gender equality.",
+    category: "Women's Rights",
+    duration: "20:14",
+    thumbnail: "https://img.youtube.com/vi/e63E7Geivs8/maxresdefault.jpg",
+    youtubeId: "e63E7Geivs8"
+  },
+  {
+    id: "10",
+    title: "Laws Protecting Women in India",
+    description: "Important laws safeguarding women in India.",
+    category: "Women's Rights",
+    duration: "18:59",
+    thumbnail: "https://img.youtube.com/vi/40e9sFm9Nko/maxresdefault.jpg",
+    youtubeId: "40e9sFm9Nko"
+  },
+  {
+    id: "11",
+    title: "Domestic violence Act Explained",
+    description: "Protection against domestic abuse explained.",
+    category: "Women's Rights",
+    duration: "17:44",
+    thumbnail: "https://img.youtube.com/vi/CekOrwMROVo/hqdefault.jpg",
+    youtubeId: "CekOrwMROVo"
+  },
+  {
+    id: "12",
+    title: "Sexual Harrassment Law (POSH Act)",
+    description: "Workplace safety under the POSH Act.",
+    category: "Women's Rights",
+    duration: "16:30",
+    thumbnail: "https://img.youtube.com/vi/HGadR_YMFvk/maxresdefault.jpg",
+    youtubeId: "HGadR_YMFvk"
+  },
+  {
+    id: "13",
+    title: "Kesavananda Bharati Case (Basic Structure)",
+    description: "Introduced the Basic Structure Doctrine.",
     category: "Case Studies",
-    duration: "18:30",
-    thumbnail: "https://img.youtube.com/vi/Fw7yWHICEcc/maxresdefault.jpg",
-    youtubeId: "Fw7yWHICEcc"
-  }
+    duration: "17:17",
+    thumbnail: "https://img.youtube.com/vi/yq9ouFOTAHc/maxresdefault.jpg",
+    youtubeId: "yq9ouFOTAHc"
+  },
+  {
+    id: "14",
+    title: "Maneka Gandhi Case (Article 21 Expansion)",
+    description: "Expanded scope of Article 21.",
+    category: "Case Studies",
+    duration: "18:04",
+    thumbnail: "https://img.youtube.com/vi/cQQHv7mzvHU/maxresdefault.jpg",
+    youtubeId: "cQQHv7mzvHU"
+  },
+  {
+    id: "15",
+    title: "Vishaka Case (Women Safety)",
+    description: "Guidelines for workplace safety of women.",
+    category: "Case Studies",
+    duration: "17:54",
+    thumbnail: "https://img.youtube.com/vi/8fWRL7TZMQg/maxresdefault.jpg",
+    youtubeId: "8fWRL7TZMQg"
+  },
+  {
+    id: "16",
+    title: "S.R. Bommai Case (President Rule)",
+    description: "Limits on misuse of President's Rule.",
+    category: "Case Studies",
+    duration: "24:47",
+    thumbnail: "https://img.youtube.com/vi/7j1IsqkM2GA/maxresdefault.jpg",
+    youtubeId: "7j1IsqkM2GA"
+  }  
 ];
 
 const categories = ["All", "Basics", "Rights", "Women's Rights", "Case Studies"];

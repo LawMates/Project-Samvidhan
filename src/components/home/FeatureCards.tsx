@@ -35,7 +35,7 @@ const features = [
     title: "Classes",
     description: "Easy-to-understand summaries of the Preamble, Rights, Duties & more.",
     icon: BookOpen,
-    path: "/learning",
+    path: "/classes",
     color: "bg-green-india/10 text-green-india",
     borderColor: "hover:border-green-india/50",
   },
