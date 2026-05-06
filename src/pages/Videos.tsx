@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Play, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface VideoItem {
   id: string;
@@ -46,7 +47,7 @@ const videos: VideoItem[] = [
     id: "4",
     title: "Historical Background",
     description: "Evolution of the Constitution from British rule.",
-    category: "basics",
+    category: "Basics",
     duration: "09:34",
     thumbnail: "https://img.youtube.com/vi/WuS_wbPix84/maxresdefault.jpg",
     youtubeId: "WuS_wbPix84&t"
@@ -164,6 +165,15 @@ const videos: VideoItem[] = [
 const categories = ["All", "Basics", "Rights", "Women's Rights", "Case Studies"];
 
 const Videos = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredVideos =
+  selectedCategory === "All"
+    ? videos
+    : videos.filter(
+        (video) => video.category === selectedCategory
+      );
+
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "Basics":
@@ -196,8 +206,9 @@ const Videos = () => {
           {categories.map((category) => (
             <Badge
               key={category}
-              variant="outline"
-              className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors px-4 py-2"
+              variant={selectedCategory === category ? "default" : "outline"}
+              onClick={() => setSelectedCategory(category)}
+              className="cursor-pointer transition-colors px-4 py-2"
             >
               {category}
             </Badge>
@@ -206,7 +217,7 @@ const Videos = () => {
 
         {/* Video Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videos.map((video) => (
+          {filteredVideos.map((video) => (
             <Card key={video.id} className="overflow-hidden hover-lift group">
               <div className="relative aspect-video bg-muted overflow-hidden">
                 <img

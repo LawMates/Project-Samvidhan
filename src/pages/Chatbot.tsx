@@ -191,7 +191,11 @@ const Chatbot = () => {
           <Card className="h-[500px] flex flex-col">
             <CardHeader className="border-b py-3">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Bot className="w-5 h-5 text-primary" />
+                <img 
+                src={chatbotIcon}
+                alt="AI Icon"
+                className="w-8 h-8 md:w-10 md:h-10"
+                />
                 Constitution Guardian
               </CardTitle>
             </CardHeader>
